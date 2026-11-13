@@ -1,0 +1,27 @@
+{
+  "name": "student-spend-ai",
+  "version": "1.0.0",
+  "description": "> A production-grade, privacy-first, responsive web application engineered for personal expense management, automatic UPI & PhonePe transaction sync, peer lending ledgers, and intelligent runway forecasting with an embedded AI Financial Copilot.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sk1098710987-source/student-spend-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sk1098710987-source/student-spend-ai/issues"
+  },
+  "homepage": "https://github.com/sk1098710987-source/student-spend-ai#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "mongoose": "^9.12.1"
+  }
+}

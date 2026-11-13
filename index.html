@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://generativelanguage.googleapis.com;">
+    <title>Gullak AI — Smart Money, UPI & Expense Manager</title>
+    
+    <!-- Progressive Web App (PWA) Meta & Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0B0F19">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Gullak AI">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        powderBlue: {
+                            50: '#f0f7fb',
+                            100: '#e1f0f8',
+                            200: '#c5e2f2',
+                            300: '#9ecde8',
+                            400: '#6faeda',
+                            500: '#4691c9',
+                            600: '#3274ab',
+                            700: '#285d8b',
+                            800: '#234e73',
+                            900: '#204361',
+                            950: '#142b40',
+                        },
+                        sunsetPeach: {
+                            50: '#fff6f2',
+                            100: '#ffebe3',
+                            200: '#ffd6c7',
+                            300: '#ffb79f',
+                            400: '#fc8d68',
+                            500: '#f46a3d',
+                            600: '#e14f22',
+                            700: '#bc3d17',
+                            800: '#9b3517',
+                            900: '#7e3019',
+                            950: '#44160a',
+                        },
+                        lavender: {
+                            50: '#f7f5fe',
+                            100: '#efebfc',
+                            200: '#dfd7f9',
+                            300: '#c8bbf5',
+                            400: '#ab95ee',
+                            500: '#8e6de5',
+                            600: '#7a4fda',
+                            700: '#673cc3',
+                            800: '#5533a3',
+                            900: '#472b84',
+                            950: '#2c1759',
+                        },
+                        peach: {
+                            50: '#fff6f2',
+                            100: '#ffebe3',
+                            200: '#ffd6c7',
+                            300: '#ffb79f',
+                            400: '#fc8d68',
+                            500: '#f46a3d',
+                            600: '#e14f22',
+                            700: '#bc3d17',
+                            900: '#5e2a22',
+                        },
+                        cream: {
+                            50: '#fdfbf7',
+                            100: '#faf7f2',
+                            200: '#f5f0e6',
+                            300: '#ede4d6',
+                            400: '#e0d2bd',
+                            500: '#cbbba1',
+                            600: '#ab997e',
+                            700: '#8c7b64',
+                            800: '#6d5e4d',
+                            900: '#4a3f34',
+                            950: '#2c251f',
+                        },
+                        warmDark: {
+                            500: '#463c58',
+                            600: '#383046',
+                            700: '#2b2437',
+                            800: '#1e1927',
+                            850: '#17131e',
+                            900: '#141118',
+                            950: '#0b090f',
+                        },
+                        sage: {
+                            50: '#f2f6f4',
+                            100: '#e2ece6',
+                            300: '#acc4b7',
+                            500: '#7ca08e',
+                            700: '#557263',
+                            900: '#2e3e36',
+                        },
+                        ochre: {
+                            50: '#fcf8f0',
+                            100: '#f9f3e4',
+                            300: '#e9cca1',
+                            500: '#c99b58',
+                            700: '#9b7135',
+                            900: '#523a18',
+                        },
+                        primary: {
+                            50: '#f0f7fb',
+                            100: '#e1f0f8',
+                            200: '#c5e2f2',
+                            300: '#ab95ee',
+                            400: '#8e6de5',
+                            500: '#7a4fda',
+                            600: '#fc8d68',
+                            700: '#f46a3d',
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Marked.js for AI Chat Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- DOMPurify for XSS Protection & Sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-canvas-mesh text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- ==========================================
+         1. STUDENT LOGIN & ONBOARDING GATEWAY
+         ========================================== -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-xl overflow-y-auto min-h-screen">
+        <div class="glass-card gradient-card-glow rounded-3xl p-6 sm:p-8 max-w-xl w-full bg-white dark:bg-[#131929] shadow-2xl border border-powderBlue-200 dark:border-slate-800 space-y-6 my-auto relative">
+            
+            <!-- Branding Header -->
+            <div class="text-center space-y-2">
+                <div class="w-14 h-14 mx-auto rounded-2xl gradient-primary flex items-center justify-center text-white text-2xl shadow-lg shadow-lavender-500/30 ai-orb mb-3">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-powderBlue-700 via-lavender-600 to-sunsetPeach-500 dark:from-powderBlue-300 dark:via-lavender-200 dark:to-sunsetPeach-300 bg-clip-text text-transparent">
+                    Gullak AI
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto font-medium">
+                    Smart Money, UPI & Expense Manager. Enter your name and monthly allowance to activate your personal financial dashboard.
+                </p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="studentLoginForm" class="space-y-4">
+                
+                <!-- Your Name -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                        <i class="fas fa-user text-lavender-500 mr-1"></i> Your Name <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="loginStudentName" required placeholder="e.g. Shivam Pandey" class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-lavender-500 font-semibold text-slate-900 dark:text-white">
+                </div>
+
+                <!-- Monthly Allowance / Budget & Currency -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                            <i class="fas fa-hand-holding-usd text-emerald-500 mr-1"></i> Monthly Allowance / Income <span class="text-rose-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="number" id="loginPocketMoney" required min="1" step="any" placeholder="e.g. 5000" class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono font-extrabold text-emerald-600 dark:text-emerald-400">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                            Currency
+                        </label>
+                        <select id="loginCurrency" class="w-full px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-lavender-500 cursor-pointer">
+                            <option value="₹">₹ INR (Rupees)</option>
+                            <option value="$">$ USD (Dollars)</option>
+                            <option value="€">€ EUR (Euros)</option>
+                            <option value="£">£ GBP (Pounds)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dates Cycle -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                            <i class="fas fa-calendar-check text-indigo-500 mr-1"></i> Date Received <span class="text-rose-500">*</span>
+                        </label>
+                        <input type="date" id="loginDateReceived" required class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                            <i class="fas fa-calendar-alt text-purple-500 mr-1"></i> Next Expected Deposit <span class="text-rose-500">*</span>
+                        </label>
+                        <input type="date" id="loginNextDate" required class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono">
+                    </div>
+                </div>
+
+                <!-- Optional Monthly Budget Target -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                        <i class="fas fa-bullseye text-amber-500 mr-1"></i> Optional Monthly Budget Target (Spending Cap)
+                    </label>
+                    <input type="number" id="loginMonthlyBudget" min="0" step="any" placeholder="e.g. 4500 (Leave empty or set limit)" class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono">
+                </div>
+
+                <!-- Avatar Selection -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                        Choose Your Avatar
+                    </label>
+                    <div class="flex items-center gap-2 justify-between">
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-lavender-600 text-white text-lg flex items-center justify-center border-2 border-lavender-600 transition-all hover:scale-105" data-emoji="🪙">🪙</button>
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-lg flex items-center justify-center border-2 border-transparent transition-all hover:scale-105" data-emoji="💰">💰</button>
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-lg flex items-center justify-center border-2 border-transparent transition-all hover:scale-105" data-emoji="🚀">🚀</button>
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-lg flex items-center justify-center border-2 border-transparent transition-all hover:scale-105" data-emoji="💻">💻</button>
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-lg flex items-center justify-center border-2 border-transparent transition-all hover:scale-105" data-emoji="⚡">⚡</button>
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-lg flex items-center justify-center border-2 border-transparent transition-all hover:scale-105" data-emoji="🎓">🎓</button>
+                        <button type="button" class="btn-avatar-choice w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-lg flex items-center justify-center border-2 border-transparent transition-all hover:scale-105" data-emoji="☕">☕</button>
+                    </div>
+                    <input type="hidden" id="loginAvatarEmoji" value="🪙">
+                </div>
+
+                <!-- Mode Selector: Fresh Start vs Demo Data -->
+                <div class="p-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wide">
+                        Choose Starting Mode
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <label class="flex items-center gap-2.5 p-2 rounded-lg bg-white dark:bg-slate-900 border border-indigo-500 cursor-pointer text-xs font-semibold">
+                            <input type="radio" name="loginStartMode" value="fresh" checked class="text-indigo-600 focus:ring-indigo-500">
+                            <div>
+                                <span class="block text-slate-900 dark:text-white">🌟 Fresh Start</span>
+                                <span class="block text-[10px] text-slate-400 font-normal">0 expenses, ready to track</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-2.5 p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer text-xs font-semibold">
+                            <input type="radio" name="loginStartMode" value="demo" class="text-indigo-600 focus:ring-indigo-500">
+                            <div>
+                                <span class="block text-slate-900 dark:text-white">📊 Demo Data</span>
+                                <span class="block text-[10px] text-slate-400 font-normal">Preloaded sample expenses</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full py-3 px-4 rounded-xl gradient-primary text-white font-extrabold text-sm shadow-lg shadow-lavender-500/25 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                    <span>Enter My Dashboard</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         2. MAIN APPLICATION SCREEN (HEADER & DASHBOARD)
+         ========================================== -->
+        <!-- ==========================================
+         2. MAIN APPLICATION SCREEN (FINTRACK FINTECH DASHBOARD)
+         ========================================== -->
+    <div id="appScreen" class="min-h-screen flex bg-[#f4f7fc] dark:bg-[#0c101d] text-slate-800 dark:text-slate-100 hidden">
+
+        <!-- MOBILE SIDEBAR OVERLAY -->
+        <div id="mobileSidebarOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+        <!-- LEFT SIDEBAR -->
+        <aside id="appSidebar" class="fixed md:sticky top-0 left-0 h-screen w-64 bg-[#0a1120] text-slate-300 flex-shrink-0 flex flex-col justify-between p-5 z-50 transform -translate-x-full md:translate-x-0 transition-all duration-300 ease-in-out border-r border-slate-800/80 overflow-y-auto overflow-x-hidden relative">
+            
+            <!-- Slider Bar Collapse Handle Button (Desktop Edge Toggle) -->
+            <button type="button" id="btnSidebarSliderHandle" onclick="toggleSidebar()" class="hidden md:flex absolute top-6 -right-3.5 z-50 w-7 h-7 rounded-full bg-[#131929] hover:bg-emerald-600 text-slate-300 hover:text-white border border-slate-700 shadow-xl items-center justify-center text-xs transition-all transform hover:scale-110 cursor-pointer" title="Hide/Show Sidebar (⌘ + B)">
+                <i id="sidebarSliderIcon" class="fas fa-chevron-left text-[10px]"></i>
+            </button>
+
+            <div class="space-y-6">
+                <!-- Brand Header -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-lavender-500 to-powderBlue-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-lavender-500/25">
+                            <i class="fas fa-piggy-bank text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
+                                Gullak AI
+                            </span>
+                            <p class="text-[10px] text-slate-400 font-medium tracking-wide">Smart Money, UPI & Expense Manager</p>
+                        </div>
+                    </div>
+                    <button type="button" class="md:hidden text-slate-400 hover:text-white" onclick="toggleSidebar()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Navigation Links (Streamlined for Gullak AI) -->
+                <nav class="space-y-1">
+                    <a href="#dashboardSection" class="sidebar-nav-item active flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-[#0d3b2e] text-[#2dd4bf] border border-[#135a46] shadow-sm transition-all">
+                        <i class="fas fa-home text-sm w-4"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#recentTransactionsSection" class="sidebar-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        <i class="fas fa-receipt text-sm w-4 text-powderBlue-400"></i>
+                        <span>Transactions</span>
+                    </a>
+                    <a href="#budgetProgressSection" class="sidebar-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        <i class="fas fa-bullseye text-sm w-4 text-emerald-400"></i>
+                        <span>Monthly Budgets</span>
+                    </a>
+                    <a href="#peerDebtsSection" class="sidebar-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        <i class="fas fa-handshake text-sm w-4 text-amber-400"></i>
+                        <span>Peer Debts Ledger</span>
+                    </a>
+                    <a href="#detailedAnalyticsSection" class="sidebar-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        <i class="fas fa-chart-line text-sm w-4 text-purple-400"></i>
+                        <span>Visual Analytics</span>
+                    </a>
+                    <button type="button" id="btnSidebarAIChat" onclick="document.getElementById('btnToggleAIChat').click()" class="w-full text-left sidebar-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        <i class="fas fa-robot text-sm w-4 text-lavender-400"></i>
+                        <span>AI Financial Copilot</span>
+                    </button>
+                </nav>
+
+                <!-- Section: INTEGRATIONS & SYNC -->
+                <div class="pt-2">
+                    <span class="block px-3.5 text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-2">Smart Integrations</span>
+                    <div class="space-y-1">
+                        <button type="button" onclick="document.getElementById('btnOpenUpiSync').click()" class="w-full text-left flex items-center justify-between px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-lg bg-[#5f259f] flex items-center justify-center text-[10px] text-white font-bold">पे</span>
+                                <span>PhonePe & UPI Sync</span>
+                            </div>
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        </button>
+                        <button type="button" onclick="document.getElementById('cloudStatusBadge').click()" class="w-full text-left flex items-center justify-between px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-cloud text-sm w-5 text-emerald-400"></i>
+                                <span>Encrypted Cloud Sync</span>
+                            </div>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono font-bold">ACTIVE</span>
+                        </button>
+                        <!-- Install Mobile App Sidebar Button -->
+                        <button type="button" id="btnSidebarInstallApp" class="w-full text-left flex items-center justify-between px-3.5 py-2.5 rounded-xl font-semibold text-xs text-emerald-400 bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-800/60 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-mobile-screen-button text-sm w-5 text-emerald-400"></i>
+                                <span>Install Mobile App</span>
+                            </div>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-700 text-white font-mono font-bold">APP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section: APP PREFERENCES -->
+                <div class="pt-2">
+                    <span class="block px-3.5 text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-2">Account & Settings</span>
+                    <div class="space-y-1">
+                        <button type="button" onclick="document.getElementById('btnSwitchStudent').click()" class="w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                            <i class="fas fa-user-circle text-sm w-4"></i>
+                            <span>Profile & Allowance</span>
+                        </button>
+                        <button type="button" onclick="document.getElementById('btnOpenSettings').click()" class="w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                            <i class="fas fa-sliders-h text-sm w-4"></i>
+                            <span>AI & App Settings</span>
+                        </button>
+                        <button type="button" onclick="document.getElementById('btnOpenTermsModal').click()" class="w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                            <i class="fas fa-shield-alt text-sm w-4"></i>
+                            <span>Privacy & Security</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Secure Cloud Status Card -->
+            <div class="pt-6">
+                <div class="rounded-2xl p-4 bg-[#121929] border border-emerald-900/40 text-center relative overflow-hidden">
+                    <div class="w-9 h-9 mx-auto rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm mb-2 shadow-inner">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="flex items-center justify-center gap-1.5">
+                        <h4 class="font-extrabold text-xs text-white">Encrypted Cloud Vault</h4>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-1 leading-snug">256-bit AES Cloud Backup • 100% Private</p>
+                    <button type="button" id="btnSyncCloudSidebar" onclick="document.getElementById('cloudStatusBadge').click()" class="w-full mt-3 py-2 px-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-emerald-500/30 transition-all">
+                        <i class="fas fa-sync-alt text-[10px]"></i>
+                        <span>Sync Vault Now</span>
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Floating Slider Bar Trigger (when sidebar is collapsed/hidden) -->
+        <button type="button" id="btnFloatingSidebarSlider" onclick="toggleSidebar()" class="hidden fixed left-0 top-24 z-40 px-2 py-3.5 rounded-r-2xl bg-[#0a1120]/95 hover:bg-emerald-950 backdrop-blur-md text-emerald-400 border-r border-t border-b border-emerald-500/40 shadow-2xl flex items-center gap-1.5 transition-all transform hover:translate-x-1 cursor-pointer group" title="Slide Open Sidebar (⌘ + B)">
+            <i class="fas fa-chevron-right text-xs group-hover:scale-125 transition-transform"></i>
+            <span class="text-[9px] uppercase font-mono font-bold tracking-widest text-emerald-300 [writing-mode:vertical-rl] rotate-180">Menu</span>
+        </button>
+
+        <!-- MAIN VIEW WRAPPER -->
+        <div class="flex-1 flex flex-col min-w-0 transition-all duration-300">
+
+            <!-- TOP NAVBAR -->
+            <header class="sticky top-0 z-30 h-16 bg-white/95 dark:bg-[#131929]/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 px-4 sm:px-6 flex items-center justify-between gap-4">
+                
+                <!-- Left: Sidebar Slider Toggle + Search Bar -->
+                <div class="flex items-center gap-3 flex-1 max-w-xl">
+                    <button type="button" id="btnToggleSidebarNavbar" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center cursor-pointer" onclick="toggleSidebar()" title="Toggle Sidebar (⌘ + B)">
+                        <i class="fas fa-bars-staggered text-base"></i>
+                    </button>
+
+                    <!-- Gullak AI Search Bar with (⌘ + K) shortcut -->
+                    <div class="relative w-full max-w-md">
+                        <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="searchTransactionsInput" placeholder="Search transactions, expenses... (⌘ + K)" class="w-full pl-9 pr-12 py-2 text-xs font-medium rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-slate-800 dark:text-slate-200 placeholder-slate-400 transition-all">
+                        <kbd class="hidden sm:inline-block absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-[10px] text-slate-500 font-mono shadow-sm">⌘K</kbd>
+                    </div>
+                </div>
+
+                <!-- Right Actions: MongoDB Cloud Sync Badge, Notifications, Theme, Profile -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    
+                    <!-- Secure Cloud Sync Status Pill -->
+                    <div id="cloudStatusBadge" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 text-xs font-bold shadow-sm cursor-pointer hover:scale-105 transition-all" title="Encrypted Cloud Vault Synced">
+                        <i class="fas fa-cloud text-xs text-emerald-600 dark:text-emerald-400"></i>
+                        <span class="hidden md:inline">Cloud Sync</span>
+                        <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-200 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 font-mono font-bold">ACTIVE</span>
+                    </div>
+
+                    <!-- Notification Bell (with red badge 3) -->
+                    <div class="relative">
+                        <button type="button" id="btnNotificationsBell" onclick="document.getElementById('smartAlertsSection').scrollIntoView({behavior: 'smooth'})" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs transition-colors relative" title="Notifications">
+                            <i class="far fa-bell text-sm"></i>
+                            <span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-black flex items-center justify-center shadow-sm">3</span>
+                        </button>
+                    </div>
+
+                    <!-- Install Mobile PWA App Button -->
+                    <button type="button" id="btnInstallApp" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 active:scale-95 text-white font-extrabold text-xs shadow-md shadow-emerald-500/20 transition-all cursor-pointer" title="Install Gullak AI App on your phone/computer">
+                        <i class="fas fa-download text-xs"></i>
+                        <span class="hidden sm:inline">Install App</span>
+                    </button>
+
+                    <!-- Theme Toggle -->
+                    <button type="button" id="themeToggleBtn" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-amber-500 text-xs transition-colors" title="Toggle Light/Dark Theme">
+                        <i class="fas fa-sun text-sm"></i>
+                    </button>
+
+                    <!-- Ask AI Copilot Toggle -->
+                    <button type="button" id="btnToggleAIChat" class="hidden sm:flex px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-lavender-600 to-lavender-700 text-white text-xs font-bold shadow-md shadow-lavender-500/20 hover:opacity-95 items-center gap-1.5">
+                        <i class="fas fa-robot text-xs"></i>
+                        <span class="hidden lg:inline">Ask AI</span>
+                    </button>
+
+                    <!-- User Profile Dropdown -->
+                    <div class="relative inline-block">
+                        <button type="button" id="btnUserMenu" class="flex items-center gap-2.5 p-1.5 pl-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" onclick="document.getElementById('userMenuDropdown').classList.toggle('hidden')">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/60 overflow-hidden flex items-center justify-center font-bold text-sm text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700" id="avatarEmoji">
+                                👨‍💻
+                            </div>
+                            <div class="text-left hidden sm:block">
+                                <span class="text-xs font-extrabold block text-slate-900 dark:text-white leading-tight" id="headerStudentName">Shivam Kumar</span>
+                                <span class="text-[10px] text-slate-400 block" id="collegeNameDisplay">Personal Account</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-0.5"></i>
+                        </button>
+
+                        <div id="userMenuDropdown" class="hidden absolute right-0 mt-2 w-52 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-2 z-50 text-xs space-y-1">
+                            <div class="p-2 border-b border-slate-100 dark:border-slate-800">
+                                <span class="font-bold block text-slate-900 dark:text-white" id="dropdownStudentName">Shivam Kumar</span>
+                                <span class="text-[10px] text-slate-400 block" id="dropdownCollegeName">Personal Account</span>
+                            </div>
+                            <button type="button" id="btnMenuUpiSync" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-2 font-semibold">
+                                <i class="fas fa-bolt text-lavender-500"></i> PhonePe & UPI Sync Hub
+                            </button>
+                            <button type="button" id="btnSwitchStudent" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-2 font-semibold">
+                                <i class="fas fa-user-edit text-powderBlue-500"></i> Switch Profile / Edit Info
+                            </button>
+                            <button type="button" id="btnOpenSettings" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-2 font-semibold">
+                                <i class="fas fa-sliders-h text-sunsetPeach-500"></i> AI & App Settings
+                            </button>
+                            <button type="button" id="btnLogout" class="w-full text-left px-3 py-2 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 text-rose-600 dark:text-rose-400 flex items-center gap-2 font-semibold">
+                                <i class="fas fa-sign-out-alt"></i> Logout / Exit
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <!-- MAIN DASHBOARD CONTENT AREA -->
+            <main class="flex-1 p-4 sm:p-6 lg:p-7 space-y-6 max-w-[1600px] w-full mx-auto" id="dashboardSection">
+
+                <!-- 1. GREETING BANNER & DATE FILTER -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+                            <span>Good Evening, <span id="studentNameDisplay">Shivam</span>!</span>
+                            <span class="text-2xl">👋</span>
+                        </h1>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium mt-0.5">
+                            Here's your financial overview for this month
+                        </p>
+                    </div>
+
+                    <!-- Right Controls: Date Selector + Currency Selector + Action -->
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        
+                        <!-- Currency Selector -->
+                        <select id="currencySelector" class="px-3 py-2 text-xs font-bold rounded-xl bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer">
+                            <option value="₹">₹ INR</option>
+                            <option value="$">$ USD</option>
+                            <option value="€">€ EUR</option>
+                            <option value="£">£ GBP</option>
+                        </select>
+
+                        <!-- Date range selector pill (📅 This Month ⌄) -->
+                        <div class="relative">
+                            <button type="button" id="btnDateFilter" class="px-3.5 py-2 text-xs font-bold rounded-xl bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-sm flex items-center gap-2 hover:border-slate-300">
+                                <i class="far fa-calendar-alt text-slate-400"></i>
+                                <span>This Month</span>
+                                <i class="fas fa-chevron-down text-[10px] text-slate-400"></i>
+                            </button>
+                        </div>
+
+                        <!-- Open PhonePe Sync Shortcut -->
+                        <button type="button" id="btnOpenUpiSync" class="px-3.5 py-2 text-xs font-bold rounded-xl bg-sunsetPeach-50 hover:bg-sunsetPeach-100 dark:bg-sunsetPeach-950/60 text-sunsetPeach-800 dark:text-sunsetPeach-200 border border-sunsetPeach-200 dark:border-sunsetPeach-800 shadow-sm transition-all flex items-center gap-1.5" title="Automated UPI & PhonePe Sync Hub">
+                            <i class="fas fa-bolt text-sunsetPeach-600 dark:text-sunsetPeach-400"></i>
+                            <span class="hidden sm:inline">PhonePe Sync</span>
+                        </button>
+                        
+                        <!-- Invisible button placeholders for app.js wiring -->
+                        <button type="button" id="btnHeroOpenUpiSync" class="hidden"></button>
+                        <button type="button" id="btnOpenAllowanceSetup" class="hidden"></button>
+                        <button type="button" id="btnOpenAIQuickAdd" class="hidden"></button>
+                        <button type="button" id="btnOpenSimulator" class="hidden"></button>
+                        <button type="button" id="btnPrintReport" class="hidden"></button>
+                        <button type="button" id="btnExportJSON" class="hidden"></button>
+                        <button type="button" id="btnExportCSV" class="hidden"></button>
+                        <button type="button" id="btnImportJSON" class="hidden"></button>
+                        <button type="button" id="btnResetSampleData" class="hidden"></button>
+                        <input type="file" id="fileImportInput" accept=".json" class="hidden">
+                    </div>
+                </div>
+
+                <!-- 2. ROW 1: THE TOP 4 SUMMARY METRIC CARDS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    
+                    <!-- Card 1: Total Balance (Dark Emerald Green Card with subtle wave curve) -->
+                    <div class="rounded-2xl p-5 bg-gradient-to-br from-[#0c4a35] via-[#083827] to-[#042419] text-white border border-[#115e43] shadow-lg relative overflow-hidden flex flex-col justify-between group">
+                        <div class="flex items-center justify-between relative z-10">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/25 border border-emerald-400/30 flex items-center justify-center text-emerald-300 text-sm">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1" id="balanceTrendBadge">
+                                <i class="fas fa-arrow-up text-[9px]"></i> +12%
+                            </span>
+                        </div>
+                        <div class="mt-4 relative z-10">
+                            <span class="text-xs text-emerald-200/80 font-semibold block">Total Balance</span>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono tracking-tight text-white mt-1" id="metricCurrentBalance">
+                                ₹45,000
+                            </div>
+                            <div class="text-[11px] mt-1" id="metricBalanceSub">
+                                <span class="text-emerald-400 font-medium">✅ Safe Runway</span>
+                            </div>
+                        </div>
+                        <!-- Decorative Wave SVG at bottom -->
+                        <div class="absolute bottom-0 left-0 right-0 h-12 opacity-35 pointer-events-none">
+                            <svg viewBox="0 0 400 80" class="w-full h-full" preserveAspectRatio="none">
+                                <path d="M0,45 C70,15 140,65 210,35 C280,5 340,55 400,20 L400,80 L0,80 Z" fill="rgba(45,212,191,0.4)"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Total Income (Soft Mint / Powder Blue Card with mini bars) -->
+                    <div class="rounded-2xl p-5 bg-[#e8f7f0] dark:bg-[#132a22] border border-[#bfe7d1] dark:border-[#1d4d3c] shadow-sm relative overflow-hidden flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-[#34a872] text-white flex items-center justify-center text-sm shadow-md shadow-emerald-600/20">
+                                <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 flex items-center gap-1">
+                                <i class="fas fa-arrow-up text-[9px]"></i> +8%
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="text-xs text-slate-700 dark:text-slate-300 font-bold block">Total Income</span>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white mt-1" id="metricAllowance">
+                                ₹30,000
+                            </div>
+                        </div>
+                        <!-- Mini Bar Chart Graphics -->
+                        <div class="flex items-end justify-end gap-1.5 h-7 mt-2 pt-1 opacity-70">
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[40%]"></span>
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[60%]"></span>
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[45%]"></span>
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[75%]"></span>
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[55%]"></span>
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[90%]"></span>
+                            <span class="w-1.5 bg-emerald-500 rounded-t h-[100%]"></span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Total Expenses (Warm Peach / Rose Card with mini bars) -->
+                    <div class="rounded-2xl p-5 bg-[#fef0ed] dark:bg-[#2d1d1a] border border-[#fbd4c7] dark:border-[#4d2d25] shadow-sm relative overflow-hidden flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-[#f46a3d] text-white flex items-center justify-center text-sm shadow-md shadow-sunsetPeach-500/20">
+                                <i class="fas fa-wallet text-xs"></i>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 flex items-center gap-1">
+                                <i class="fas fa-arrow-up text-[9px]"></i> +5%
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="text-xs text-slate-700 dark:text-slate-300 font-bold block">Total Expenses</span>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white mt-1" id="metricTotalExpenses">
+                                ₹12,000
+                            </div>
+                        </div>
+                        <!-- Mini Bar Chart Graphics in Peach -->
+                        <div class="flex items-end justify-end gap-1.5 h-7 mt-2 pt-1 opacity-70">
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[30%]"></span>
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[50%]"></span>
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[40%]"></span>
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[65%]"></span>
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[80%]"></span>
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[60%]"></span>
+                            <span class="w-1.5 bg-[#f46a3d] rounded-t h-[75%]"></span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Savings (Soft Lavender Card with mini bars) -->
+                    <div class="rounded-2xl p-5 bg-[#f1effe] dark:bg-[#211a33] border border-[#ded8fe] dark:border-[#3b2d5c] shadow-sm relative overflow-hidden flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-[#8e6de5] text-white flex items-center justify-center text-sm shadow-md shadow-lavender-500/20">
+                                <i class="fas fa-piggy-bank text-xs"></i>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-lavender-100 text-lavender-800 dark:bg-lavender-950 dark:text-lavender-300 flex items-center gap-1">
+                                <i class="fas fa-arrow-up text-[9px]"></i> +15%
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="text-xs text-slate-700 dark:text-slate-300 font-bold block">Savings</span>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white mt-1" id="metricMonthlySavings">
+                                ₹18,000
+                            </div>
+                        </div>
+                        <!-- Mini Bar Chart Graphics in Lavender -->
+                        <div class="flex items-end justify-end gap-1.5 h-7 mt-2 pt-1 opacity-70">
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[35%]"></span>
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[50%]"></span>
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[45%]"></span>
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[70%]"></span>
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[60%]"></span>
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[85%]"></span>
+                            <span class="w-1.5 bg-[#8e6de5] rounded-t h-[95%]"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 3. ROW 2: MIDDLE 3 COLUMNS -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                    
+                    <!-- Col 1: Spending Overview (lg:col-span-5) -->
+                    <div class="lg:col-span-5 bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-chart-pie text-emerald-500 text-sm"></i>
+                                <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Spending Overview</h3>
+                            </div>
+                            <div class="flex items-center p-0.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-[11px] font-bold">
+                                <button type="button" class="btn-period-pill px-2.5 py-1 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm transition-all" data-period="monthly">Monthly</button>
+                                <button type="button" class="btn-period-pill px-2.5 py-1 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all" data-period="weekly">Weekly</button>
+                                <button type="button" class="btn-period-pill px-2.5 py-1 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all" data-period="daily">Daily</button>
+                            </div>
+                        </div>
+
+                        <!-- Chart + Breakdown flex row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                            
+                            <!-- Doughnut with Center Text -->
+                            <div class="sm:col-span-6 relative flex items-center justify-center">
+                                <div class="w-44 h-44 relative">
+                                    <canvas id="categoryChart"></canvas>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
+                                        <span class="text-base font-extrabold font-mono text-slate-900 dark:text-white" id="doughnutCenterTotal">₹12,000</span>
+                                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Total Spent</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Legend List -->
+                            <div class="sm:col-span-6 space-y-2 text-xs" id="categoryBreakdownList">
+                                <div class="flex items-center justify-between font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                                        <span class="text-slate-800 dark:text-slate-200">Food</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span class="text-slate-500 font-normal">32%</span>
+                                        <span class="font-bold text-slate-900 dark:text-white">₹3,840</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                        <span class="text-slate-800 dark:text-slate-200">Shopping</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span class="text-slate-500 font-normal">25%</span>
+                                        <span class="font-bold text-slate-900 dark:text-white">₹3,000</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                        <span class="text-slate-800 dark:text-slate-200">Transport</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span class="text-slate-500 font-normal">17%</span>
+                                        <span class="font-bold text-slate-900 dark:text-white">₹2,040</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                                        <span class="text-slate-800 dark:text-slate-200">Bills</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span class="text-slate-500 font-normal">14%</span>
+                                        <span class="font-bold text-slate-900 dark:text-white">₹1,680</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+                                        <span class="text-slate-800 dark:text-slate-200">Others</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span class="text-slate-500 font-normal">12%</span>
+                                        <span class="font-bold text-slate-900 dark:text-white">₹1,440</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Col 2: AI Financial Insights (lg:col-span-4) -->
+                    <div class="lg:col-span-4 bg-gradient-to-br from-[#ebfbf3] to-[#f4fdf8] dark:from-[#11241f] dark:to-[#0f1d1a] border border-[#a4f1cc]/80 dark:border-emerald-800/50 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+                        
+                        <!-- Header -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-sparkles text-emerald-500 text-sm"></i>
+                                <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">AI Financial Insights</h3>
+                            </div>
+                            <button type="button" onclick="document.getElementById('btnToggleAIChat').click()" class="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+
+                        <!-- Cute 3D Robot & Speech Bubble -->
+                        <div class="flex items-center gap-3 my-3">
+                            <div class="w-16 h-16 rounded-2xl bg-white dark:bg-[#162923] p-1.5 shadow-md border border-emerald-200/60 dark:border-emerald-700/50 flex-shrink-0 flex items-center justify-center text-3xl">
+                                🤖
+                            </div>
+                            <div class="flex-1 bg-white dark:bg-[#162923] p-3 rounded-2xl rounded-tl-sm border border-emerald-200/60 dark:border-emerald-700/50 shadow-sm text-xs text-slate-800 dark:text-slate-100 font-medium leading-relaxed" id="aiInsightsSpeechBubble">
+                                Your food expenses increased by 18% compared to last month.
+                            </div>
+                        </div>
+
+                        <!-- Bottom Lightbulb Advice Card with Mini Growth Trend -->
+                        <div class="p-3.5 rounded-xl bg-white/90 dark:bg-[#162923]/90 border border-emerald-200/80 dark:border-emerald-700/60 shadow-sm flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-amber-500 text-base">💡</span>
+                                <p class="text-xs text-slate-700 dark:text-slate-200 font-semibold" id="aiInsightsTipText">
+                                    Try cooking at home to save around ₹1,500 this month!
+                                </p>
+                            </div>
+                            <i class="fas fa-chart-line text-emerald-500 text-lg flex-shrink-0"></i>
+                        </div>
+
+                    </div>
+
+                    <!-- Col 3: Connected Accounts (lg:col-span-3) -->
+                    <div class="lg:col-span-3 bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between" id="connectedAccountsSection">
+                        
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-link text-slate-500 text-sm"></i>
+                            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Connected Accounts</h3>
+                        </div>
+
+                        <!-- Accounts List (Authentic to Gullak AI) -->
+                        <div class="space-y-3">
+                            
+                            <!-- PhonePe & UPI -->
+                            <div onclick="document.getElementById('btnOpenUpiSync').click()" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 border border-slate-100 dark:border-slate-800 cursor-pointer transition-all group">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-[#5f259f] text-white flex items-center justify-center font-bold text-sm shadow-sm group-hover:scale-105 transition-transform">
+                                        पे
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-bold text-xs text-slate-900 dark:text-white">PhonePe & UPI</span>
+                                            <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">Connected</span>
+                                        </div>
+                                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Auto expense & SMS parser</span>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-xs text-slate-400"></i>
+                            </div>
+
+                            <!-- Encrypted Cloud Vault -->
+                            <div onclick="document.getElementById('cloudStatusBadge').click()" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 border border-slate-100 dark:border-slate-800 cursor-pointer transition-all group">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm shadow-sm group-hover:scale-105 transition-transform">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-bold text-xs text-slate-900 dark:text-white">Encrypted Cloud Vault</span>
+                                            <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-mono">ACTIVE</span>
+                                        </div>
+                                        <span class="text-[10px] text-slate-500 dark:text-slate-400">256-bit AES Backup • Synced</span>
+                                    </div>
+                                </div>
+                                <i class="fas fa-sync-alt text-xs text-emerald-600 dark:text-emerald-400 group-hover:rotate-180 transition-transform duration-500"></i>
+                            </div>
+
+                            <!-- Client-Side Local Storage -->
+                            <div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 border border-slate-100 dark:border-slate-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-powderBlue-500 text-white flex items-center justify-center text-sm shadow-sm">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-bold text-xs text-slate-900 dark:text-white">Device Offline Cache</span>
+                                            <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold bg-powderBlue-100 text-powderBlue-800 dark:bg-powderBlue-950 dark:text-powderBlue-300 font-mono">READY</span>
+                                        </div>
+                                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Instant offline access anytime</span>
+                                    </div>
+                                </div>
+                                <i class="fas fa-check text-xs text-emerald-500"></i>
+                            </div>
+
+                        </div>
+
+                        <!-- Manage Accounts Button -->
+                        <button type="button" onclick="document.getElementById('btnOpenUpiSync').click()" class="w-full mt-3 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-bold text-xs flex items-center justify-center gap-2 transition-colors">
+                            <span>Open UPI Sync Hub</span>
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- 4. ROW 3: BOTTOM 3 COLUMNS -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                    
+                    <!-- Col 1: Recent Transactions Table (lg:col-span-6) -->
+                    <div class="lg:col-span-6 bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm space-y-4" id="recentTransactionsSection">
+                        
+                        <div class="flex items-center justify-between pb-1 border-b border-slate-100 dark:border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-exchange-alt text-slate-500 text-sm"></i>
+                                <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Recent Transactions</h3>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" class="btn-tx-filter text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1" data-type="all">
+                                    <span>View All</span>
+                                    <i class="fas fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead class="text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 text-[11px]">
+                                    <tr>
+                                        <th class="pb-2.5 font-bold">Merchant</th>
+                                        <th class="pb-2.5 font-bold">Category</th>
+                                        <th class="pb-2.5 font-bold text-right">Amount</th>
+                                        <th class="pb-2.5 font-bold">Date</th>
+                                        <th class="pb-2.5 font-bold text-center">Source</th>
+                                        <th class="pb-2.5 font-bold text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionsTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <!-- Dynamic rows loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- Col 2: Budget Progress (lg:col-span-3) -->
+                    <div class="lg:col-span-3 bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between" id="budgetProgressSection">
+                        
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <i class="fas fa-bullseye text-slate-500 text-sm"></i>
+                                <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Budget Progress</h3>
+                            </div>
+
+                            <!-- Progress Items -->
+                            <div class="space-y-4" id="budgetProgressList">
+                                
+                                <!-- Food -->
+                                <div>
+                                    <div class="flex items-center justify-between text-xs font-semibold mb-1">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-utensils text-emerald-500 text-xs w-3.5"></i>
+                                            <span class="text-slate-800 dark:text-slate-200 font-bold">Food</span>
+                                        </div>
+                                        <div class="text-[11px] font-mono">
+                                            <span class="font-bold text-slate-900 dark:text-white" id="budgetFoodSpent">₹3,840</span>
+                                            <span class="text-slate-400" id="budgetFoodTotal">/ ₹5,000</span>
+                                            <span class="text-slate-500 ml-1 font-bold" id="budgetFoodPct">77%</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                        <div id="budgetFoodBar" class="bg-emerald-500 h-2 rounded-full" style="width: 77%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Shopping -->
+                                <div>
+                                    <div class="flex items-center justify-between text-xs font-semibold mb-1">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-shopping-cart text-blue-500 text-xs w-3.5"></i>
+                                            <span class="text-slate-800 dark:text-slate-200 font-bold">Shopping</span>
+                                        </div>
+                                        <div class="text-[11px] font-mono">
+                                            <span class="font-bold text-slate-900 dark:text-white" id="budgetShopSpent">₹3,000</span>
+                                            <span class="text-slate-400" id="budgetShopTotal">/ ₹4,000</span>
+                                            <span class="text-slate-500 ml-1 font-bold" id="budgetShopPct">75%</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                        <div id="budgetShopBar" class="bg-blue-500 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Transport -->
+                                <div>
+                                    <div class="flex items-center justify-between text-xs font-semibold mb-1">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-car text-rose-500 text-xs w-3.5"></i>
+                                            <span class="text-slate-800 dark:text-slate-200 font-bold">Transport</span>
+                                        </div>
+                                        <div class="text-[11px] font-mono">
+                                            <span class="font-bold text-rose-600" id="budgetTransSpent">₹2,040</span>
+                                            <span class="text-slate-400" id="budgetTransTotal">/ ₹2,000</span>
+                                            <span class="text-rose-500 ml-1 font-bold" id="budgetTransPct">102%</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                        <div id="budgetTransBar" class="bg-rose-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-[10px] text-rose-500 font-bold flex items-center gap-1 mt-0.5" id="budgetTransAlert">
+                                        <i class="fas fa-exclamation-triangle"></i> Over Budget
+                                    </span>
+                                </div>
+
+                                <!-- Bills -->
+                                <div>
+                                    <div class="flex items-center justify-between text-xs font-semibold mb-1">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-home text-purple-500 text-xs w-3.5"></i>
+                                            <span class="text-slate-800 dark:text-slate-200 font-bold">Bills</span>
+                                        </div>
+                                        <div class="text-[11px] font-mono">
+                                            <span class="font-bold text-slate-900 dark:text-white" id="budgetBillsSpent">₹1,680</span>
+                                            <span class="text-slate-400" id="budgetBillsTotal">/ ₹2,000</span>
+                                            <span class="text-slate-500 ml-1 font-bold" id="budgetBillsPct">84%</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                        <div id="budgetBillsBar" class="bg-purple-500 h-2 rounded-full" style="width: 84%"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Overall Allowance Burn Bar Hook for app.js -->
+                        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 mt-2">
+                            <div class="flex justify-between text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">
+                                <span>Monthly Allowance</span>
+                                <span id="allowanceProgressLabel" class="font-mono text-emerald-600">0% used</span>
+                            </div>
+                            <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div id="allowanceProgressBar" class="h-2 rounded-full bg-emerald-500" style="width: 40%"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Col 3: Quick Actions (lg:col-span-3) -->
+                    <div class="lg:col-span-3 bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-3">
+                        
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-bolt text-amber-500 text-sm"></i>
+                            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Quick Actions</h3>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            
+                            <!-- Action 1: Make a Payment (Through PhonePe) -->
+                            <button type="button" onclick="document.getElementById('btnOpenUpiSync').click()" class="w-full p-3 rounded-2xl bg-[#dff5e9] dark:bg-[#132c21] hover:bg-[#d0eedc] dark:hover:bg-[#1a382a] border border-[#aae7c7] dark:border-[#1d4d38] text-slate-900 dark:text-white flex items-center gap-3 transition-all text-left group">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-sm shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                                    <i class="fas fa-paper-plane text-xs"></i>
+                                </div>
+                                <div>
+                                    <span class="font-extrabold text-xs block">Make a Payment</span>
+                                    <span class="text-[10px] text-emerald-800 dark:text-emerald-300 font-medium">(Through PhonePe)</span>
+                                </div>
+                            </button>
+
+                            <!-- Action 2: Add Transaction -->
+                            <button type="button" id="btnOpenAddTx" class="w-full p-3 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white flex items-center gap-3 transition-all text-left shadow-sm group">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center text-sm border border-slate-200 dark:border-slate-700 group-hover:scale-105 transition-transform">
+                                    <i class="fas fa-plus text-xs"></i>
+                                </div>
+                                <span class="font-extrabold text-xs">Add Transaction</span>
+                            </button>
+
+                            <!-- Action 3: Set a Budget -->
+                            <button type="button" onclick="document.getElementById('btnOpenAllowanceSetup').click()" class="w-full p-3 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white flex items-center gap-3 transition-all text-left shadow-sm group">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center text-sm border border-slate-200 dark:border-slate-700 group-hover:scale-105 transition-transform">
+                                    <i class="fas fa-bullseye text-xs"></i>
+                                </div>
+                                <span class="font-extrabold text-xs">Set a Budget</span>
+                            </button>
+
+                            <!-- Action 4: Ask Gullak AI -->
+                            <button type="button" onclick="document.getElementById('btnToggleAIChat').click()" class="w-full p-3 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white flex items-center gap-3 transition-all text-left shadow-sm group">
+                                <div class="w-9 h-9 rounded-xl bg-lavender-100 dark:bg-lavender-950/60 text-lavender-600 dark:text-lavender-300 flex items-center justify-center text-sm border border-lavender-200 dark:border-lavender-800 group-hover:scale-105 transition-transform">
+                                    <i class="fas fa-sparkles text-xs"></i>
+                                </div>
+                                <span class="font-extrabold text-xs">Ask Gullak AI</span>
+                            </button>
+
+                            <!-- Action 5: Got Money Back (1-Click Settle) -->
+                            <button type="button" id="btnOpenQuickSettle" class="w-full p-3 rounded-2xl bg-gradient-to-r from-emerald-50 dark:from-emerald-950/40 to-teal-50 dark:to-teal-950/30 hover:from-emerald-100 dark:hover:from-emerald-950/60 hover:to-teal-100 border border-emerald-300 dark:border-emerald-800 text-slate-800 dark:text-white flex items-center gap-3 transition-all text-left shadow-sm group">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white flex items-center justify-center text-sm shadow-md shadow-emerald-500/25 group-hover:scale-105 transition-transform">
+                                    <i class="fas fa-hand-holding-usd text-xs"></i>
+                                </div>
+                                <div>
+                                    <span class="font-extrabold text-xs block text-slate-900 dark:text-white">Got Money Back</span>
+                                    <span class="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold">1-Click Settle Loan</span>
+                                </div>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- 5. COLLAPSIBLE / EXTENDED ADVANCED LEDGER & ANALYTICS -->
+                <div class="space-y-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+                    
+                    <!-- PEER DEBTS SECTION -->
+                    <section class="bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm space-y-4" id="peerDebtsSection">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                            <div>
+                                <h3 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                                    <i class="fas fa-handshake text-emerald-500"></i> Peer Debts & Social Lending Ledger
+                                </h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Track loans given to friends and debts you owe with AI polite reminder generators</p>
+                            </div>
+                            <button type="button" onclick="document.getElementById('btnOpenAddTx').click()" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                + Log Peer Loan
+                            </button>
+                        </div>
+
+                        <!-- Metrics Row for Peer Lending & Days Left -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                                <span class="text-slate-500 text-[10px] font-bold block uppercase">Money Given (Lent)</span>
+                                <span class="text-sm font-extrabold font-mono text-amber-600 dark:text-amber-400" id="metricMoneyGiven">₹0</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                                <span class="text-slate-500 text-[10px] font-bold block uppercase">Received Back</span>
+                                <span class="text-sm font-extrabold font-mono text-cyan-600 dark:text-cyan-400" id="metricMoneyReceivedBack">₹0</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                                <span class="text-slate-500 text-[10px] font-bold block uppercase">Money Borrowed</span>
+                                <span class="text-sm font-extrabold font-mono text-purple-600 dark:text-purple-400" id="metricMoneyBorrowed">₹0</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                                <span class="text-slate-500 text-[10px] font-bold block uppercase">Money Repaid</span>
+                                <span class="text-sm font-extrabold font-mono text-emerald-600 dark:text-emerald-400" id="metricMoneyRepaid">₹0</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <!-- Left: Money Given to Friends -->
+                            <div class="space-y-2">
+                                <span class="text-xs font-bold uppercase text-amber-600 flex items-center gap-1.5">
+                                    <i class="fas fa-arrow-up"></i> Friends Who Owe Me (Money Given)
+                                </span>
+                                <div id="debtsLentList" class="space-y-2"></div>
+                            </div>
+                            <!-- Right: Money Borrowed -->
+                            <div class="space-y-2">
+                                <span class="text-xs font-bold uppercase text-purple-600 flex items-center gap-1.5">
+                                    <i class="fas fa-arrow-down"></i> Debts I Owe (Money Borrowed)
+                                </span>
+                                <div id="debtsBorrowedList" class="space-y-2"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- DETAILED CHARTS & RUNWAY TRAJECTORY SECTION -->
+                    <section class="bg-white dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm space-y-4" id="detailedAnalyticsSection">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                            <div>
+                                <h3 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                                    <i class="fas fa-chart-line text-emerald-500"></i> Interactive Financial Visualizations
+                                </h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Runway depletion forecasts & cash flow trajectory</p>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs font-mono">
+                                <div><span class="text-slate-400 text-[10px] block">Days Left</span><span class="font-extrabold text-blue-600" id="metricRemainingDays">0 Days</span></div>
+                                <div><span class="text-slate-400 text-[10px] block">Daily Safe Cap</span><span class="font-extrabold text-amber-600" id="metricDailySafeLimit">₹0/day</span></div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                            <!-- Chart 1: Daily Spending vs Safe Limit -->
+                            <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60">
+                                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 mb-2">Daily Spending vs Safe Limit</h4>
+                                <div class="relative h-48 w-full"><canvas id="dailySpendingChart"></canvas></div>
+                            </div>
+                            <!-- Chart 2: Income vs Expense Flow -->
+                            <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60">
+                                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 mb-2">Income & Expense Flow</h4>
+                                <div class="relative h-48 w-full"><canvas id="incomeExpenseChart"></canvas></div>
+                            </div>
+                            <!-- Chart 3: Predictive Burn-Rate Runway -->
+                            <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60">
+                                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 mb-2">Predictive Runway Curve</h4>
+                                <div class="relative h-48 w-full"><canvas id="runwayChart"></canvas></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SMART ALERTS CONTAINER & AI COPILOT SUGGESTIONS -->
+                    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="smartAlertsSection">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold uppercase text-slate-500 tracking-wider flex items-center gap-1.5">
+                                <i class="fas fa-bell text-rose-500"></i> Real-Time Alerts
+                            </span>
+                            <div id="smartAlertsContainer" class="space-y-2"></div>
+                        </div>
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold uppercase text-slate-500 tracking-wider flex items-center gap-1.5">
+                                <i class="fas fa-brain text-lavender-500"></i> AI Spending Advisor
+                            </span>
+                            <div id="aiSuggestionsContainer" class="space-y-2"></div>
+                        </div>
+                    </section>
+
+                </div>
+
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="mt-auto py-5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101d] text-xs text-slate-500 dark:text-slate-400 px-6">
+                <div class="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded-lg bg-emerald-500 flex items-center justify-center text-slate-950 text-[10px] font-black">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="font-bold text-slate-800 dark:text-slate-200">Gullak AI</span>
+                        <span class="text-slate-400">• Smart Money, UPI & Expense Manager • 100% Private</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-medium">
+                        <button type="button" id="btnOpenPrivacyModal" class="hover:text-emerald-600 dark:hover:text-emerald-400">Privacy Policy</button>
+                        <button type="button" id="btnOpenTermsModal" class="hover:text-emerald-600 dark:hover:text-emerald-400">Terms & Conditions</button>
+                    </div>
+                </div>
+            </footer>
+
+        </div> <!-- END MAIN VIEW WRAPPER -->
+
+    </div> <!-- END #appScreen -->
+
+    <!-- ==========================================
+         MODALS & FLOATING DRAWERS
+         ========================================== -->
+
+
+    <!-- ==========================================
+         MODALS & FLOATING DRAWERS
+         ========================================== -->
+
+    <!-- 1. ALLOWANCE & PROFILE SETUP MODAL -->
+    <div id="allowanceSetupModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fas fa-user-graduate text-indigo-500"></i> Pocket Money & Allowance Setup
+                </h3>
+                <button class="btn-close-modal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="allowanceSetupForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Your Name</label>
+                    <input type="text" id="setupStudentName" required class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-lavender-500 font-semibold text-slate-900 dark:text-white">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Monthly Allowance / Inflow</label>
+                        <input type="number" id="setupAllowance" required min="0" step="any" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-lavender-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Optional Monthly Budget Target</label>
+                        <input type="number" id="setupMonthlyBudget" min="0" step="any" placeholder="e.g. 6000" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Date Received</label>
+                        <input type="date" id="setupDateReceived" required class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Expected Next Payment Date</label>
+                        <input type="date" id="setupNextDate" required class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-2">
+                    <button type="button" class="btn-close-modal px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Cancel</button>
+                    <button type="submit" class="px-5 py-2 text-xs font-bold rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 shadow-md">Save & Sync Dashboard</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- QUICK SETTLE / MONEY RETURNED MODAL -->
+    <div id="quickSettleModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fas fa-hand-holding-usd text-emerald-500"></i> Got Money Back from Friend
+                </h3>
+                <button class="btn-close-modal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+                Did a friend return the cash you gave them? Click <strong>"Got Back"</strong> below to mark it settled and instantly restore the money back into your Gullak balance.
+            </p>
+            <div id="quickSettleItemsList" class="space-y-2.5 max-h-80 overflow-y-auto pr-1">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ADD TRANSACTION MODAL -->
+    <div id="addTransactionModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fas fa-plus-circle text-indigo-500"></i> Record Financial Transaction
+                </h3>
+                <button class="btn-close-modal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="addTransactionForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Transaction Type</label>
+                        <select id="txTypeSelect" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold">
+                            <option value="expense">💸 Expense (Outflow)</option>
+                            <option value="inflow">💰 Extra Inflow / Gig</option>
+                            <option value="money_given">🤝 Money Given (Lent to Friend)</option>
+                            <option value="money_received_back">📥 Money Received Back (Debt Settled)</option>
+                            <option value="money_borrowed">💳 Money Borrowed (Loan Taken)</option>
+                            <option value="money_repaid">🔄 Money Repaid (Debt Settled by You)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Amount</label>
+                        <input type="number" id="txAmountInput" required min="0.01" step="any" placeholder="0.00" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono font-bold">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Title / Description</label>
+                    <input type="text" id="txTitleInput" required placeholder="e.g. Canteen Burger & Chai, Metro Pass..." class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="txCategoryFieldGroup">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Category</label>
+                        <select id="txCategorySelect" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="food">🍔 Food & Canteen</option>
+                            <option value="transport">🚌 Metro & Commute</option>
+                            <option value="study">📚 Books & Printouts</option>
+                            <option value="rent">🏠 Hostel & Utilities</option>
+                            <option value="social">🍿 Hangouts & Movies</option>
+                            <option value="subscriptions">📺 Student Subscriptions</option>
+                            <option value="shopping">🛍️ Personal & Clothing</option>
+                            <option value="emergency">💊 Medical & Emergency</option>
+                            <option value="other">🏷️ Miscellaneous</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Date</label>
+                        <input type="date" id="txDateInput" required class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <!-- Conditional Person Field for Peer Debts -->
+                <div id="txPersonFieldGroup" class="hidden">
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Friend / Person Name</label>
+                    <input type="text" id="txPersonInput" placeholder="e.g. Rohan Verma, Priya..." class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Optional Notes</label>
+                    <input type="text" id="txNotesInput" placeholder="Add location, shared tags, or receipt info..." class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-2">
+                    <button type="button" class="btn-close-modal px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Cancel</button>
+                    <button type="submit" class="px-5 py-2 text-xs font-bold rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 shadow-md">Add Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. AI NATURAL LANGUAGE QUICK ADD MODAL -->
+    <div id="aiQuickAddModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-500 flex items-center justify-center text-xs">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white">AI Conversational Quick-Add</h3>
+                </div>
+                <button class="btn-close-modal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3">
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    Type or dictate naturally. Gullak AI automatically categorizes and extracts amounts & peer names!
+                </p>
+
+                <textarea id="aiQuickAddInput" rows="3" placeholder="e.g. 'Spent 180 on cold coffee and shawarma with Ananya' or 'Lent 500 to Rohan for fest ticket'" class="w-full p-3 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+
+                <!-- Parsed Live Preview Box -->
+                <div id="aiParsedPreview" class="hidden p-3 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900/40 text-xs space-y-1">
+                    <div class="font-bold text-purple-700 dark:text-purple-300 flex items-center gap-1.5">
+                        <i class="fas fa-check-circle"></i> AI Extracted Data:
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-slate-600 dark:text-slate-300 pt-1">
+                        <div><strong>Type:</strong> <span id="parsedType" class="font-mono">EXPENSE</span></div>
+                        <div><strong>Amount:</strong> <span id="parsedAmount" class="font-mono text-purple-600 font-bold">₹0</span></div>
+                        <div><strong>Category:</strong> <span id="parsedCategory" class="capitalize">food</span></div>
+                        <div><strong>Person:</strong> <span id="parsedPerson">N/A</span></div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-1.5 text-[11px] text-slate-400">
+                    <span>Try:</span>
+                    <button onclick="document.getElementById('aiQuickAddInput').value='Spent 120 on auto to college'; document.getElementById('aiQuickAddInput').dispatchEvent(new Event('input'))" class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:text-indigo-500">"Spent 120 on auto"</button>
+                    <button onclick="document.getElementById('aiQuickAddInput').value='Lent 300 to Roommate for pizza'; document.getElementById('aiQuickAddInput').dispatchEvent(new Event('input'))" class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:text-indigo-500">"Lent 300 to Roommate"</button>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-2">
+                <button type="button" class="btn-close-modal px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Cancel</button>
+                <button type="button" id="btnConfirmAIQuickAdd" class="px-5 py-2 text-xs font-bold rounded-xl bg-purple-600 text-white hover:bg-purple-700 shadow-md">Confirm & Log</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. "CAN I AFFORD THIS?" PURCHASE SIMULATOR MODAL -->
+    <div id="purchaseSimulatorModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-500 flex items-center justify-center text-xs">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white">"Can I Afford This?" Simulator</h3>
+                </div>
+                <button class="btn-close-modal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3">
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    Simulate an impulse buy or gadget purchase against your remaining pocket money and runway days.
+                </p>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Item / Expense Name</label>
+                    <input type="text" id="simItemName" placeholder="e.g. Wireless Earbuds, Party Outfit, Video Game..." class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Target Price</label>
+                    <input type="number" id="simItemCost" min="1" step="any" placeholder="e.g. 1500" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono font-bold">
+                </div>
+
+                <!-- Simulation Output Card -->
+                <div id="simulatorResultCard" class="hidden p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
+                    <div id="simVerdictBadge" class="inline-block px-2.5 py-1 text-xs font-bold rounded-lg">
+                        Verdict
+                    </div>
+                    <p id="simVerdictMessage" class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed"></p>
+                    <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
+                        <strong>AI Recommendation:</strong> <span id="simRecommendation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-2">
+                <button type="button" class="btn-close-modal px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Close</button>
+                <button type="button" id="btnRunSimulator" class="px-5 py-2 text-xs font-bold rounded-xl bg-amber-600 text-white hover:bg-amber-700 shadow-md">Simulate Impact</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. AI POLITE DEBT REMINDER GENERATOR MODAL -->
+    <div id="reminderModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-500 flex items-center justify-center text-xs">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white">AI Polite Debt Reminder</h3>
+                </div>
+                <button class="btn-close-modal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3">
+                <div class="flex items-center justify-between text-xs bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl">
+                    <span>Friend: <strong id="reminderFriendName" class="text-indigo-600 dark:text-indigo-400">Rohan</strong></span>
+                    <span>Amount: <strong id="reminderAmount" class="font-mono text-emerald-600 font-bold">₹500</strong></span>
+                </div>
+
+                <!-- Tone Selector -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">Choose Tone Style</label>
+                    <div class="grid grid-cols-4 gap-1.5">
+                        <button class="btn-tone-choice px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition-colors" data-tone="friendly">Friendly</button>
+                        <button class="btn-tone-choice px-2 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors" data-tone="casual">Casual</button>
+                        <button class="btn-tone-choice px-2 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors" data-tone="funny">Funny</button>
+                        <button class="btn-tone-choice px-2 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors" data-tone="meme">Meme</button>
+                    </div>
+                </div>
+
+                <!-- Generated Message Box -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Generated Message (Ready to Send)</label>
+                    <textarea id="reminderMessageText" rows="4" class="w-full p-3 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans"></textarea>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                <button type="button" id="btnShareWhatsApp" class="px-3 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 flex items-center gap-1.5 shadow-md">
+                    <i class="fab fa-whatsapp text-sm"></i> WhatsApp
+                </button>
+                <div class="flex gap-2">
+                    <button type="button" class="btn-close-modal px-3 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Cancel</button>
+                    <button type="button" id="btnCopyReminder" class="px-4 py-2 text-xs font-bold rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-1.5 shadow-md">
+                        <i class="fas fa-copy"></i> Copy Message
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         6. APP & AI SETTINGS MODAL
+         ========================================== -->
+    <div id="settingsModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="glass-card rounded-3xl p-6 max-w-md w-full bg-white dark:bg-[#131929] shadow-2xl border border-powderBlue-200/70 dark:border-slate-800 space-y-5 my-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-powderBlue-200/60 dark:border-slate-800">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-lavender-100 dark:bg-lavender-950/60 text-lavender-600 dark:text-lavender-300 flex items-center justify-center text-sm shadow-sm">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">AI & App Settings</h3>
+                        <p class="text-[11px] text-slate-600 dark:text-slate-300">Configure Gemini Copilot and preferences</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-modal text-slate-400 hover:text-slate-700 dark:hover:text-white p-1">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="settingsForm" class="space-y-4">
+                <!-- Gemini API Key -->
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-bold text-slate-800 dark:text-slate-200">
+                            <i class="fas fa-key text-lavender-600 mr-1"></i> Google Gemini API Key
+                        </label>
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="text-[11px] text-lavender-600 dark:text-lavender-400 hover:underline font-bold">
+                            Get free key <i class="fas fa-external-link-alt text-[9px]"></i>
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <input type="password" id="settingsGeminiApiKey" placeholder="AIzaSy..." class="w-full px-3.5 py-2.5 pr-20 text-xs rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-lavender-500 font-mono text-slate-900 dark:text-white">
+                        <button type="button" id="btnToggleApiKeyVisibility" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                            <i class="fas fa-eye" id="apiKeyEyeIcon"></i>
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                        Optional: If blank, Gullak AI uses the built-in offline smart heuristic engine. Stored strictly in your browser's local storage.
+                    </p>
+                </div>
+
+                <!-- Test Connection Status -->
+                <div id="apiKeyTestStatus" class="hidden p-2.5 rounded-xl text-xs flex items-center gap-2"></div>
+
+                <!-- Preference Toggles -->
+                <div class="space-y-2 pt-2 border-t border-powderBlue-200/50 dark:border-slate-800">
+                    <label class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer">
+                        <div class="text-xs">
+                            <span class="font-bold block text-slate-900 dark:text-slate-100">Sound Effects</span>
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Play pleasant audio chimes on actions</span>
+                        </div>
+                        <input type="checkbox" id="settingsSoundEffects" class="w-4 h-4 rounded text-lavender-600 focus:ring-lavender-500">
+                    </label>
+
+                    <label class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer">
+                        <div class="text-xs">
+                            <span class="font-bold block text-slate-900 dark:text-slate-100">Smart Runway Alerts</span>
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Real-time alerts for high burn rate</span>
+                        </div>
+                        <input type="checkbox" id="settingsAutoSuggestions" checked class="w-4 h-4 rounded text-lavender-600 focus:ring-lavender-500">
+                    </label>
+                </div>
+
+                <div class="pt-2 flex items-center justify-between gap-2">
+                    <button type="button" id="btnTestGeminiKey" class="px-3 py-2 text-xs font-bold rounded-xl bg-powderBlue-100 hover:bg-powderBlue-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-powderBlue-900 dark:text-powderBlue-200 transition-colors">
+                        <i class="fas fa-plug mr-1"></i> Test Key
+                    </button>
+                    <div class="flex gap-2">
+                        <button type="button" class="btn-close-modal px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200">Close</button>
+                        <button type="submit" class="px-4 py-2 text-xs font-extrabold rounded-xl gradient-primary text-white shadow-md hover:opacity-95 transition-all">
+                            Save Settings
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         7. PHONEPE & UPI AUTO-SYNC HUB MODAL
+         ========================================== -->
+    <div id="upiSyncModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="glass-card gradient-card-glow rounded-3xl p-6 sm:p-7 max-w-2xl w-full bg-white dark:bg-[#131929] shadow-2xl border border-powderBlue-200/70 dark:border-slate-800 space-y-5 my-auto max-h-[92vh] overflow-y-auto">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-powderBlue-200/60 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-lavender-500 text-white flex items-center justify-center text-lg shadow-md shadow-lavender-500/30">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-extrabold text-base text-slate-900 dark:text-white">PhonePe & UPI Auto-Sync Hub</h3>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-lavender-100 text-lavender-800 dark:bg-lavender-900/60 dark:text-lavender-200 border border-lavender-200 dark:border-lavender-800">
+                                iOS & Android
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300">Read PhonePe alerts, parse bank debits & auto-sync your remaining balance</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-modal text-slate-400 hover:text-slate-700 dark:hover:text-white p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold">
+                <button type="button" class="btn-upi-tab flex-1 py-2 px-3 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 bg-white dark:bg-slate-900 text-lavender-700 dark:text-lavender-300 shadow-sm" data-tab="tab-sms-paste">
+                    <i class="fas fa-paste"></i>
+                    <span>Paste SMS/Alert</span>
+                </button>
+                <button type="button" class="btn-upi-tab flex-1 py-2 px-3 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white" data-tab="tab-screenshot-ocr">
+                    <i class="fas fa-camera"></i>
+                    <span>Receipt Screenshot</span>
+                </button>
+                <button type="button" class="btn-upi-tab flex-1 py-2 px-3 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white" data-tab="tab-ios-guide">
+                    <i class="fab fa-apple"></i>
+                    <span>iOS Automation</span>
+                </button>
+                <button type="button" class="btn-upi-tab flex-1 py-2 px-3 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white" data-tab="tab-simulate">
+                    <i class="fas fa-magic"></i>
+                    <span>1-Click Test</span>
+                </button>
+            </div>
+
+            <!-- TAB 1: PASTE SMS / NOTIFICATION / EMAIL -->
+            <div id="tab-sms-paste" class="upi-tab-content space-y-4">
+                <div class="p-3.5 rounded-2xl bg-lavender-50 dark:bg-lavender-950/30 border border-lavender-200 dark:border-lavender-900/40 text-xs text-lavender-950 dark:text-lavender-200 leading-relaxed font-medium">
+                    <i class="fas fa-info-circle mr-1 text-lavender-600"></i>
+                    Copy any <strong>PhonePe notification</strong>, <strong>Bank SMS</strong> (HDFC, SBI, ICICI, Kotak, Axis, etc.), or <strong>email alert</strong> and paste it below. The engine will instantly extract the amount, merchant, and update your available balance.
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1.5">
+                        Bank SMS / PhonePe Notification Text
+                    </label>
+                    <textarea id="upiRawTextInput" rows="3" placeholder="e.g. INR 240.00 debited from a/c **9812 on 13-Nov-26 to SWIGGY via UPI. Avail Bal INR 4,250.00" class="w-full p-3 text-xs rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-lavender-500 font-mono text-slate-900 dark:text-white"></textarea>
+                </div>
+
+                <!-- Parsed Live Card Preview -->
+                <div id="upiParsedPreview" class="hidden p-4 rounded-2xl border border-lavender-300 dark:border-lavender-800 bg-lavender-50/60 dark:bg-lavender-950/20 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-lavender-700 dark:text-lavender-300 flex items-center gap-1.5">
+                            <i class="fas fa-check-circle text-emerald-500"></i> Transaction Detected
+                        </span>
+                        <span id="upiParsedTypeBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300">
+                            DEBIT
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 block font-bold">Amount</span>
+                            <span id="upiParsedAmount" class="font-mono font-extrabold text-sm text-slate-900 dark:text-white">₹0</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 block font-bold">Merchant / Vendor</span>
+                            <span id="upiParsedVendor" class="font-bold text-xs text-slate-800 dark:text-slate-200 truncate block">N/A</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 block font-bold">Category</span>
+                            <span id="upiParsedCategory" class="font-bold text-xs text-slate-800 dark:text-slate-200 capitalize">food</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 block font-bold">Bank Balance After</span>
+                            <span id="upiParsedBalance" class="font-mono font-bold text-xs text-emerald-600 dark:text-emerald-400">N/A</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex justify-end">
+                        <button type="button" id="btnConfirmUpiSync" class="px-4 py-2 text-xs font-bold rounded-xl gradient-primary text-white shadow-md hover:opacity-95 transition-all flex items-center gap-1.5">
+                            <i class="fas fa-check"></i>
+                            <span>Confirm & Sync to Dashboard</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: SCREENSHOT OCR -->
+            <div id="tab-screenshot-ocr" class="upi-tab-content hidden space-y-4">
+                <div class="p-3.5 rounded-2xl bg-powderBlue-50/50 dark:bg-slate-800/60 border border-powderBlue-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                    <i class="fas fa-camera text-lavender-500 mr-1"></i>
+                    Upload or paste (<kbd class="px-1.5 py-0.5 rounded bg-white dark:bg-slate-900 border text-[10px]">Cmd + V</kbd>) a screenshot of your <strong>PhonePe "Payment Successful"</strong> screen. The AI extracts the exact merchant, timestamp, and amount.
+                </div>
+
+                <div id="receiptDropzone" class="border-2 border-dashed border-powderBlue-300 dark:border-slate-700 rounded-3xl p-6 text-center cursor-pointer hover:border-lavender-500 transition-all bg-powderBlue-50/30 dark:bg-slate-900/40">
+                    <input type="file" id="receiptFileInput" accept="image/*" class="hidden">
+                    <div id="dropzoneEmpty">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-lavender-100 dark:bg-lavender-950/60 text-lavender-600 dark:text-lavender-300 flex items-center justify-center text-xl mb-2">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <p class="text-xs font-bold text-slate-800 dark:text-slate-100">Click to upload or drag & drop PhonePe screenshot</p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Supports PNG, JPG, or paste directly with Cmd+V</p>
+                    </div>
+                    <div id="dropzonePreview" class="hidden space-y-3">
+                        <img id="receiptImagePreview" src="" alt="PhonePe Receipt" class="max-h-48 mx-auto rounded-xl shadow-md border border-slate-200 dark:border-slate-700">
+                        <p id="receiptFileName" class="text-xs font-semibold text-slate-700 dark:text-slate-200"></p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-300 font-bold">
+                        <i class="fas fa-shield-alt text-emerald-500"></i>
+                        <span>Processed in-memory. 100% private to your session.</span>
+                    </div>
+                    <button type="button" id="btnScanReceipt" class="px-4 py-2.5 text-xs font-bold rounded-xl gradient-primary text-white shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 disabled:opacity-50" disabled>
+                        <i class="fas fa-sparkles"></i>
+                        <span>Scan & Extract Details</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 3: iOS SHORTCUTS & EMAIL SETUP -->
+            <div id="tab-ios-guide" class="upi-tab-content hidden space-y-4 text-xs">
+                <div class="p-3.5 rounded-2xl bg-lavender-50 dark:bg-lavender-950/30 border border-lavender-200 dark:border-lavender-900/40 text-lavender-900 dark:text-lavender-200">
+                    <h4 class="font-bold flex items-center gap-1.5 text-xs mb-1">
+                        <i class="fab fa-apple text-sm"></i> How to Automate PhonePe on your iPhone:
+                    </h4>
+                    <p class="text-[11px] leading-relaxed">
+                        Because Apple restricts apps from directly reading SMS in the background, here are the two working iOS setups used by fintech pros:
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:border-slate-700 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-lavender-100 dark:bg-lavender-900/60 text-lavender-700 dark:text-lavender-300 flex items-center justify-center text-[10px] font-bold">1</span>
+                                Apple Shortcuts "When PhonePe Closes" Trigger
+                            </span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 font-semibold">Zero Server</span>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-700 dark:text-slate-300 pl-1">
+                            <li>Open <strong>Shortcuts</strong> on your iPhone $
+ightarrow$ Tap <strong>Automation</strong> tab $
+ightarrow$ <strong>New Automation</strong>.</li>
+                            <li>Select <strong>App</strong> $
+ightarrow$ Choose <strong>PhonePe</strong> $
+ightarrow$ Check <strong>"Is Closed"</strong> and <strong>"Run Immediately"</strong>.</li>
+                            <li>Action: Add <strong>"Ask for Input"</strong> (Amount) or <strong>"Get Latest Screenshot"</strong>.</li>
+                            <li>Action: <strong>"Open URL"</strong> $
+ightarrow$ Opens Gullak AI and automatically prompts the quick sync!</li>
+                        </ol>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:border-slate-700 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-lavender-100 dark:bg-lavender-900/60 text-lavender-700 dark:text-lavender-300 flex items-center justify-center text-[10px] font-bold">2</span>
+                                100% Hands-Free Bank Alert Email Forwarder
+                            </span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-lavender-100 text-lavender-700 dark:bg-lavender-950 dark:text-lavender-300 font-semibold">100% Automatic</span>
+                        </div>
+                        <p class="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                            Your bank sends an email for every debit. You can run a free 5-line Google Apps Script on your Gmail account that watches for "Transaction Alert" emails and updates your Gullak AI data automatically.
+                        </p>
+                        <button type="button" id="btnCopyEmailScript" class="px-3 py-1.5 text-[11px] font-bold rounded-xl bg-slate-100 dark:bg-slate-800 dark:bg-slate-900 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center gap-1.5">
+                            <i class="fas fa-copy text-lavender-500"></i> Copy Google Apps Script Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: 1-CLICK TEST SIMULATOR -->
+            <div id="tab-simulate" class="upi-tab-content hidden space-y-4">
+                <div class="p-3.5 rounded-2xl bg-powderBlue-50/50 dark:bg-slate-800/60 border border-powderBlue-200/70 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
+                    <i class="fas fa-magic text-lavender-500 mr-1"></i>
+                    Click any sample PhonePe transaction below to simulate a real payment and verify how Gullak AI parses and reconciles it in real time:
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <button type="button" class="btn-simulate-txn p-3 rounded-2xl border border-powderBlue-200/70 dark:border-slate-800 hover:border-lavender-400 bg-white dark:bg-slate-900 text-left transition-all hover:scale-[1.01]" data-sms="Paid INR 40.00 to Chai & Snacks Stall via PhonePe. Avail Bal INR 4,720.00">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
+                            <span>☕ Chai & Samosa</span>
+                            <span class="text-rose-500 font-mono">-₹40</span>
+                        </div>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate">Paid INR 40.00 to Chai & Snacks Stall via PhonePe...</p>
+                    </button>
+
+                    <button type="button" class="btn-simulate-txn p-3 rounded-2xl border border-powderBlue-200/70 dark:border-slate-800 hover:border-lavender-400 bg-white dark:bg-slate-900 text-left transition-all hover:scale-[1.01]" data-sms="INR 240.00 debited from a/c **4128 on 13-Nov to SWIGGY. UPI Ref 4910238. Avail Bal INR 4,480.00">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
+                            <span>🍔 Swiggy Hostel Lunch</span>
+                            <span class="text-rose-500 font-mono">-₹240</span>
+                        </div>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate">debited to SWIGGY. UPI Ref 4910238...</p>
+                    </button>
+
+                    <button type="button" class="btn-simulate-txn p-3 rounded-2xl border border-powderBlue-200/70 dark:border-slate-800 hover:border-lavender-400 bg-white dark:bg-slate-900 text-left transition-all hover:scale-[1.01]" data-sms="Paid INR 300.00 to Delhi Metro Smart Card via PhonePe. Avail Bal INR 4,180.00">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
+                            <span>🚇 Metro Smart Card</span>
+                            <span class="text-rose-500 font-mono">-₹300</span>
+                        </div>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate">Paid INR 300.00 to Delhi Metro Smart Card...</p>
+                    </button>
+
+                    <button type="button" class="btn-simulate-txn p-3 rounded-2xl border border-powderBlue-200/70 dark:border-slate-800 hover:border-lavender-400 bg-white dark:bg-slate-900 text-left transition-all hover:scale-[1.01]" data-sms="INR 1200.00 credited to a/c **4128 from Rahul Sharma for Freelance Project via UPI. Avail Bal INR 5,380.00">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
+                            <span>💰 Freelance Gig Inflow</span>
+                            <span class="text-emerald-500 font-mono">+₹1,200</span>
+                        </div>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate">INR 1200.00 credited from Rahul Sharma for Freelance...</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Close -->
+            <div class="pt-3 border-t border-powderBlue-200/70 dark:border-slate-800 flex justify-end">
+                <button type="button" class="btn-close-modal px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700">
+                    Close Hub
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. TERMS & PRIVACY POLICY MODAL -->
+    <div id="termsPrivacyModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="glass-card gradient-card-glow rounded-3xl p-6 sm:p-7 max-w-2xl w-full bg-white dark:bg-[#131929] shadow-2xl border border-powderBlue-200/70 dark:border-slate-800 space-y-4 my-auto max-h-[90vh] flex flex-col">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-powderBlue-200/70 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-lavender-500 text-white flex items-center justify-center text-lg shadow-md shadow-lavender-500/30">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-base text-slate-900 dark:text-white" id="termsPrivacyModalTitle">Privacy Policy & Security Standards</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300">Gullak AI • Transparent, Privacy-First Architecture</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-modal text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white p-1.5 rounded-xl hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="flex gap-2 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-powderBlue-200/70 dark:border-slate-800 text-xs font-semibold">
+                <button type="button" id="tabBtnPrivacy" class="btn-legal-tab flex-1 py-2 px-3 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 bg-white dark:bg-slate-900 text-lavender-700 dark:text-lavender-300 shadow-sm" data-tab="legal-privacy">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Privacy Policy</span>
+                </button>
+                <button type="button" id="tabBtnTerms" class="btn-legal-tab flex-1 py-2 px-3 rounded-xl transition-all text-center flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white" data-tab="legal-terms">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Terms & Conditions</span>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="flex-1 overflow-y-auto pr-1 space-y-4 text-xs text-slate-700 dark:text-slate-200 leading-relaxed max-h-[60vh]">
+                
+                <!-- PRIVACY TAB -->
+                <div id="legal-privacy" class="legal-tab-content space-y-3.5">
+                    <div class="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-200 flex items-start gap-2.5">
+                        <i class="fas fa-check-shield text-emerald-500 text-base mt-0.5"></i>
+                        <div>
+                            <span class="font-bold block text-sm">Zero-Server, 100% Client-Side Private</span>
+                            <span>Gullak AI does not maintain user databases or track personal spending. All transactions, monthly allowances, and peer debts live solely inside your browser's private localStorage.</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-database text-lavender-500"></i> 1. Where Is Your Data Stored?
+                        </h4>
+                        <p>
+                            Your financial records (monthly allowance, spending logs, peer debts, and categories) are saved directly in your web browser's <code>localStorage</code>. No financial data is ever collected, sold, or shared with third parties or advertisers.
+                        </p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-bolt text-lavender-500"></i> 2. UPI & Bank SMS Processing
+                        </h4>
+                        <p>
+                            When you paste SMS debit alerts or use the PhonePe sync hub, our heuristic regex engine executes <strong>entirely on your local CPU</strong>. The message text is parsed in memory to extract vendor and amount details and is never uploaded to any remote server.
+                        </p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-brain text-lavender-500"></i> 3. Google Gemini AI Copilot Integration
+                        </h4>
+                        <p>
+                            If you optionally provide your own Google Gemini API key:
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600 dark:text-slate-300">
+                            <li>Your API key is stored securely in your browser's local settings.</li>
+                            <li>Questions asked to the Copilot or receipts submitted for OCR are transmitted directly over encrypted HTTPS (SSL) between your device and Google's official Gemini endpoint (<code>generativelanguage.googleapis.com</code>).</li>
+                            <li>If no API key is supplied, Gullak AI automatically runs in complete offline rule-based mode.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-trash-alt text-lavender-500"></i> 4. Complete Data Ownership & Erasure
+                        </h4>
+                        <p>
+                            You retain 100% ownership of your data at all times. You can export complete backups anytime in JSON or CSV, or permanently erase all stored records by clicking "Logout / Exit" or clearing your browser's cache.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TERMS TAB -->
+                <div id="legal-terms" class="legal-tab-content hidden space-y-3.5">
+                    <div class="p-3.5 rounded-2xl bg-lavender-50 dark:bg-lavender-950/30 border border-lavender-200 dark:border-lavender-900/40 text-lavender-900 dark:text-lavender-200">
+                        <span class="font-bold block text-sm">Personal Financial Management Tool</span>
+                        <span>By using Gullak AI, you acknowledge and agree to the guidelines and disclaimers outlined below.</span>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-info-circle text-lavender-500"></i> 1. Non-Financial Advice Disclaimer
+                        </h4>
+                        <p>
+                            Gullak AI is an informational self-help budgeting and expense tracking utility. The AI recommendations, budget forecasts, and "Can I Afford This?" simulations are automated estimates and do <strong>not</strong> constitute certified financial, tax, or legal advice.
+                        </p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-hand-holding-usd text-lavender-500"></i> 2. Peer Debts & Social Lending
+                        </h4>
+                        <p>
+                            The peer debts tracker is a personal record-keeping ledger for informal loans with friends and family. Gullak AI is not a payment gateway, escrow service, or financial intermediary. Settle and reminder actions reflect your personal notes only.
+                        </p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
+                            <i class="fas fa-shield-virus text-lavender-500"></i> 3. User Responsibility & Backups
+                        </h4>
+                        <p>
+                            Because your data is stored locally on your device, clearing browser history or switching private/incognito tabs can erase un-backed data. We strongly recommend using the <strong>Backup Data (JSON)</strong> feature periodically to retain your records.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Close -->
+            <div class="pt-3 border-t border-powderBlue-200/70 dark:border-slate-800 flex justify-end">
+                <button type="button" class="btn-close-modal px-5 py-2 text-xs font-bold rounded-xl gradient-primary text-white shadow-sm hover:opacity-95 transition-all">
+                    I Understand & Agree
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. FLOATING AI COPILOT CHAT DRAWER -->
+    <div id="aiChatDrawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-slate-900 border-l border-powderBlue-200/70 dark:border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        
+        <!-- Drawer Header -->
+        <div class="p-4 border-b border-powderBlue-200/70 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900 dark:bg-[#0c101d]">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl gradient-primary flex items-center justify-center text-white text-xs shadow-md shadow-lavender-500/20">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm text-slate-900 dark:text-white">Gullak AI Copilot</h3>
+                    <p class="text-[10px] text-emerald-500 flex items-center gap-1 font-semibold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Online • Student Financial Advisor
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1">
+                <button id="btnOpenSettingsFromChat" class="text-slate-500 dark:text-slate-400 hover:text-lavender-600 dark:hover:text-lavender-400 p-1.5 rounded-lg" title="Configure AI & Gemini API Key">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button id="btnCloseAIChat" class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white p-1.5 rounded-lg">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Messages History -->
+        <div id="aiChatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+            
+            <!-- Welcome Greeting -->
+            <div class="flex items-start gap-2 mb-3">
+                <div class="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-white text-[10px] shadow-sm">🤖</div>
+                <div class="chat-bubble-ai rounded-2xl rounded-tl-none px-4 py-3 text-xs text-slate-700 dark:text-slate-200 leading-relaxed shadow-sm">
+                    Hey there! 👋 I am your <strong>Gullak AI Financial Advisor</strong>.<br><br>
+                    I monitor your daily expenses, alert you before your budget runs out, and find savings opportunities.
+                </div>
+            </div>
+
+            <!-- Quick Action Pills -->
+            <div class="flex flex-wrap gap-1.5 pt-1">
+                <button onclick="document.getElementById('aiChatInput').value='How can I save ₹500 this week?'; document.getElementById('btnSendAIChat').click()" class="px-2.5 py-1 text-[11px] rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                    💡 How to save ₹500?
+                </button>
+                <button onclick="document.getElementById('aiChatInput').value='Will my pocket money last until next deposit?'; document.getElementById('btnSendAIChat').click()" class="px-2.5 py-1 text-[11px] rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                    ⏳ Predict runway
+                </button>
+                <button onclick="document.getElementById('aiChatInput').value='Analyze my food and dining expenses'; document.getElementById('btnSendAIChat').click()" class="px-2.5 py-1 text-[11px] rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                    🍔 Analyze food spend
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Chat Input Footer -->
+        <div class="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]">
+            <div class="flex items-center gap-2">
+                <input type="text" id="aiChatInput" placeholder="Ask Gullak AI anything about your money..." class="flex-1 px-3 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button id="btnSendAIChat" class="p-2.5 rounded-xl gradient-primary text-white text-xs shadow-md shadow-indigo-500/20 hover:opacity-90 transition-all">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-1.5 text-center">Powered by Gullak Heuristic Intelligence & Gemini</p>
+        </div>
+
+    </div>
+
+    <!-- PWA MOBILE INSTALL PROMPT BANNER -->
+    <div id="pwaInstallBanner" class="hidden fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:w-96 z-50 p-4 rounded-2xl bg-[#0f172a]/95 backdrop-blur-md border border-emerald-500/40 shadow-2xl text-white transition-all transform duration-300">
+        <div class="flex items-start gap-3">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 flex-shrink-0">
+                <i class="fas fa-wallet text-white text-base"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-extrabold text-xs text-white">Install Gullak AI App</h4>
+                    <button type="button" id="btnClosePwaBanner" class="text-slate-400 hover:text-white p-1 text-xs">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+                    Launch in 1 tap, track UPI offline, and run in full-screen on your phone's home screen.
+                </p>
+                <div class="mt-3 flex items-center gap-2">
+                    <button type="button" id="btnBannerInstallAction" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5">
+                        <i class="fas fa-download text-xs"></i> <span>Install Now</span>
+                    </button>
+                    <button type="button" id="btnDismissPwaBanner" class="px-2.5 py-1.5 rounded-xl text-slate-400 hover:text-white text-xs font-semibold">
+                        Later
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Install Helper Modal -->
+    <div id="pwaIosGuideModal" class="modal-container hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 text-center">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl shadow-inner">
+                <i class="fas fa-mobile-screen-button"></i>
+            </div>
+            <div>
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Install on iPhone (iOS)</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
+                    Apple requires adding web apps from Safari:
+                </p>
+            </div>
+            <div class="text-left space-y-2.5 bg-slate-50 dark:bg-slate-900/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                <div class="flex items-center gap-2.5 text-slate-700 dark:text-slate-200">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                    <span>Tap the Safari <strong>Share</strong> button <i class="fas fa-arrow-up-from-bracket text-emerald-500 ml-1"></i> (bottom bar)</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-slate-700 dark:text-slate-200">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                    <span>Scroll down and tap <strong>"Add to Home Screen"</strong> <i class="far fa-plus-square text-emerald-500 ml-1"></i></span>
+                </div>
+                <div class="flex items-center gap-2.5 text-slate-700 dark:text-slate-200">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                    <span>Tap <strong>"Add"</strong> in top-right. Enjoy Gullak AI App!</span>
+                </div>
+            </div>
+            <button type="button" class="btn-close-modal w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-extrabold text-xs transition-colors">
+                Got It
+            </button>
+        </div>
+    </div>
+
+    <!-- Application Script Modules -->
+    <script src="js/storage.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/peer-debts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

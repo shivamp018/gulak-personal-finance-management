@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+    <linearGradient id="coinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="potGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#10b981" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <!-- App Background Squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="#10b981" stroke-width="4" stroke-opacity="0.3"/>
+  
+  <!-- Glowing Pot / Gullak Base -->
+  <g filter="url(#glow)">
+    <!-- Gullak Jar Body -->
+    <path d="M160 220 C160 170 200 150 256 150 C312 150 352 170 352 220 C352 250 376 290 380 340 C384 400 336 430 256 430 C176 430 128 400 132 340 C136 290 160 250 160 220 Z" fill="url(#potGrad)"/>
+    <!-- Lid / Neck -->
+    <rect x="206" y="130" width="100" height="28" rx="14" fill="#6ee7b7"/>
+    <!-- Coin Slot -->
+    <rect x="226" y="195" width="60" height="10" rx="5" fill="#064e3b" opacity="0.6"/>
+  </g>
+
+  <!-- Gold Coin Dropping In -->
+  <g>
+    <circle cx="256" cy="115" r="42" fill="url(#coinGrad)" stroke="#fef3c7" stroke-width="3"/>
+    <text x="256" y="128" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#78350f" text-anchor="middle">₹</text>
+  </g>
+
+  <!-- Sparkles -->
+  <path d="M380 140 L386 154 L400 160 L386 166 L380 180 L374 166 L360 160 L374 154 Z" fill="#fbbf24"/>
+  <path d="M120 220 L124 230 L134 234 L124 238 L120 248 L116 238 L106 234 L116 230 Z" fill="#6ee7b7"/>
+</svg>

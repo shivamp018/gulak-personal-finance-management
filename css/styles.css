@@ -1,0 +1,302 @@
+/* ==========================================================================
+   Gullak AI — Powder Blue, Soft Lavender, Sunset Peach & Crisp White Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+    --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    /* Powder Blue */
+    --powder-blue-50: #f0f7fb;
+    --powder-blue-100: #e1f0f8;
+    --powder-blue-200: #c5e2f2;
+    --powder-blue-300: #9ecde8;
+    --powder-blue-400: #6faeda;
+    --powder-blue-500: #4691c9;
+    --powder-blue-600: #3274ab;
+
+    /* Soft Lavender */
+    --lavender-50: #f7f5fe;
+    --lavender-100: #efebfc;
+    --lavender-200: #dfd7f9;
+    --lavender-300: #c8bbf5;
+    --lavender-400: #ab95ee;
+    --lavender-500: #8e6de5;
+    --lavender-600: #7a4fda;
+    
+    /* Warm Sunset Peach */
+    --peach-50: #fff6f2;
+    --peach-100: #ffebe3;
+    --peach-200: #ffd6c7;
+    --peach-300: #ffb79f;
+    --peach-400: #fc8d68;
+    --peach-500: #f46a3d;
+
+    /* Crisp Card Surfaces */
+    --color-bg-base: #f8fbfe;
+    --color-card-bg: #ffffff;
+    --color-card-subtle: #f1f6fc;
+    --color-card-border: #e2e8f4;
+    --color-card-hover: #edf4fc;
+
+    /* High-Contrast Clear Typography */
+    --text-primary: #0f172a;    /* Deep sharp slate for ultra-clear readability */
+    --text-secondary: #334155;  /* Rich contrast subtitle */
+    --text-muted: #64748b;
+
+    /* Shadows & Glows */
+    --shadow-subtle: 0 2px 12px -2px rgba(30, 41, 59, 0.06), 0 1px 3px 0 rgba(30, 41, 59, 0.04);
+    --shadow-elevated: 0 12px 28px -4px rgba(111, 174, 218, 0.18), 0 4px 12px -2px rgba(122, 79, 218, 0.1);
+    --shadow-sunset-glow: 0 0 25px -2px rgba(252, 141, 104, 0.35);
+    --shadow-lavender-glow: 0 0 25px -2px rgba(142, 109, 229, 0.35);
+}
+
+.dark {
+    /* Deep Midnight Obsidian with Indigo Sheen */
+    --color-bg-base: #0c101d;
+    --color-card-bg: #131929;
+    --color-card-subtle: #192238;
+    --color-card-border: #1f2b45;
+    --color-card-hover: #1b253d;
+
+    /* Bright Crisp White & Soft Powder/Lavender for Dark Mode */
+    --text-primary: #f8fafc;    /* Crisp White */
+    --text-secondary: #cbd5e1;  /* High contrast soft silver */
+    --text-muted: #94a3b8;
+
+    --shadow-subtle: 0 4px 16px 0 rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 14px 34px -4px rgba(0, 0, 0, 0.7), 0 0 24px 0 rgba(111, 174, 218, 0.15);
+    --shadow-sunset-glow: 0 0 35px -2px rgba(252, 141, 104, 0.25);
+    --shadow-lavender-glow: 0 0 35px -2px rgba(171, 149, 238, 0.25);
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg-base);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+/* Form controls & button defaults to guarantee high contrast across themes */
+button, select, input, textarea {
+    font-family: inherit;
+    color: inherit;
+}
+
+select option {
+    background-color: #ffffff;
+    color: #0f172a;
+}
+
+.dark select option {
+    background-color: #131929;
+    color: #f8fafc;
+}
+
+/* Ambient Canvas Mesh: Powder Blue, Soft Lavender, Sunset Peach & Crisp White */
+.bg-canvas-mesh {
+    background-color: var(--color-bg-base);
+    background-image: 
+        radial-gradient(circle at 10% 12%, rgba(197, 226, 242, 0.6) 0%, transparent 45%),
+        radial-gradient(circle at 90% 88%, rgba(255, 214, 199, 0.55) 0%, transparent 50%),
+        radial-gradient(circle at 50% 45%, rgba(223, 215, 249, 0.45) 0%, transparent 55%);
+    background-attachment: fixed;
+}
+
+.dark .bg-canvas-mesh {
+    background-color: var(--color-bg-base);
+    background-image: 
+        radial-gradient(circle at 10% 15%, rgba(70, 145, 201, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 88% 85%, rgba(244, 106, 61, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 45%, rgba(142, 109, 229, 0.18) 0%, transparent 55%);
+    background-attachment: fixed;
+}
+
+/* Glassmorphism & High-Contrast Cards */
+.glass-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-subtle);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+    border-color: rgba(111, 174, 218, 0.5);
+    box-shadow: var(--shadow-elevated);
+}
+
+.glass-pill {
+    background: var(--color-card-subtle);
+    border: 1px solid var(--color-card-border);
+    color: var(--text-primary);
+}
+
+/* Signature Gradients: Powder Blue, Lavender & Sunset Peach */
+.gradient-primary {
+    background: linear-gradient(135deg, #4691c9 0%, #7a4fda 50%, #fc8d68 100%);
+}
+
+.gradient-powder-lavender {
+    background: linear-gradient(135deg, #e1f0f8 0%, #efebfc 100%);
+}
+
+.dark .gradient-powder-lavender {
+    background: linear-gradient(135deg, #192238 0%, #2b1f42 100%);
+}
+
+.gradient-card-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-card-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6faeda 0%, #ab95ee 50%, #fc8d68 100%);
+}
+
+/* UPI PhonePe Pulse Animation */
+@keyframes pulse-ring {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(252, 141, 104, 0.6); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(252, 141, 104, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(252, 141, 104, 0); }
+}
+
+.upi-pulse-ring {
+    animation: pulse-ring 2.5s infinite;
+}
+
+@keyframes orb-glow {
+    0%, 100% {
+        box-shadow: 0 0 18px rgba(111, 174, 218, 0.5), 0 0 32px rgba(223, 215, 249, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 28px rgba(142, 109, 229, 0.7), 0 0 45px rgba(252, 141, 104, 0.45);
+    }
+}
+
+.ai-orb {
+    animation: orb-glow 4s ease-in-out infinite alternate;
+}
+
+/* Custom Scrollbars in Powder & Lavender */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c5e2f2;
+    border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #283756;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ecde8;
+}
+
+/* Category Badges in Crème & Pastel Harmony */
+.badge-food { background-color: #fbeee9; color: #b84b3b; border-color: #f5d1c8; }
+.badge-transport { background-color: #f0edf9; color: #583fb0; border-color: #d8cff0; }
+.badge-study { background-color: #faf3e4; color: #9c6c1d; border-color: #f0deb8; }
+.badge-rent { background-color: #f3edff; color: #7b4bf2; border-color: #e2d4ff; }
+.badge-social { background-color: #fcf0f5; color: #b33971; border-color: #f7d2e3; }
+.badge-subscriptions { background-color: #e8ecf8; color: #3b5aa6; border-color: #cbd7f3; }
+.badge-shopping { background-color: #faede5; color: #ad5017; border-color: #f7d7c3; }
+.badge-emergency { background-color: #fde8e8; color: #b91c1c; border-color: #facdcd; }
+.badge-other { background-color: #f5f0e6; color: #695e52; border-color: #ede2cf; }
+
+.dark .badge-food { background-color: rgba(216, 132, 118, 0.2); color: #f6c0b7; border-color: rgba(216, 132, 118, 0.35); }
+.dark .badge-transport { background-color: rgba(147, 110, 248, 0.2); color: #d4c2fd; border-color: rgba(147, 110, 248, 0.35); }
+.dark .badge-study { background-color: rgba(201, 155, 88, 0.2); color: #edd2a4; border-color: rgba(201, 155, 88, 0.35); }
+.dark .badge-rent { background-color: rgba(181, 154, 251, 0.2); color: #e7dcff; border-color: rgba(181, 154, 251, 0.35); }
+.dark .badge-social { background-color: rgba(224, 118, 172, 0.2); color: #f5bbd9; border-color: rgba(224, 118, 172, 0.35); }
+.dark .badge-subscriptions { background-color: rgba(122, 142, 194, 0.2); color: #c4d0f0; border-color: rgba(122, 142, 194, 0.35); }
+.dark .badge-shopping { background-color: rgba(230, 142, 85, 0.2); color: #f3c7a5; border-color: rgba(230, 142, 85, 0.35); }
+.dark .badge-emergency { background-color: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.35); }
+.dark .badge-other { background-color: rgba(163, 153, 173, 0.2); color: #dfdae3; border-color: rgba(163, 153, 173, 0.35); }
+
+/* Modal Backdrop */
+.modal-backdrop {
+    background-color: rgba(20, 17, 24, 0.72);
+    backdrop-filter: blur(10px);
+}
+
+/* Chat bubble styling */
+.chat-bubble-ai {
+    background: linear-gradient(135deg, rgba(147, 110, 248, 0.1) 0%, rgba(201, 155, 88, 0.08) 100%);
+    border: 1px solid rgba(181, 154, 251, 0.3);
+}
+.dark .chat-bubble-ai {
+    background: linear-gradient(135deg, rgba(147, 110, 248, 0.18) 0%, rgba(201, 155, 88, 0.12) 100%);
+    border: 1px solid rgba(181, 154, 251, 0.35);
+}
+
+/* Drag & Drop Receipt Zone */
+.drag-active {
+    border-color: #936ef8 !important;
+    background-color: rgba(147, 110, 248, 0.08) !important;
+    transform: scale(1.01);
+}
+
+/* Print / PDF Financial Summary Styles */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+    .print-only {
+        display: block !important;
+    }
+    .glass-card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+}
+
+/* Gullak AI Dashboard Styling */
+html {
+    scroll-behavior: smooth;
+}
+
+#appSidebar::-webkit-scrollbar {
+    width: 4px;
+}
+#appSidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.sidebar-nav-item.active {
+    background-color: #0d3b2e !important;
+    color: #2dd4bf !important;
+    border-color: #135a46 !important;
+}
+
+.btn-period-pill.active {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+}
+.dark .btn-period-pill.active {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
